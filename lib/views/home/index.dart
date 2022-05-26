@@ -11,12 +11,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: 200,
-        height: 200,
-        color: Colors.red,
-        child: const Text('123123123'),
-      ),
-    );
+        body: Container(
+      width: 200,
+      height: 200,
+      color: Colors.red,
+      child: const Text('我是首页'),
+    ));
   }
 }
