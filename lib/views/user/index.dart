@@ -10,12 +10,11 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
       width: 200,
       height: 200,
       color: Colors.green,
       child: const Text('我是用户页'),
-    ));
+    );
   }
 }

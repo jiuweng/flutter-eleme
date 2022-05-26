@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:flutter_eleme/common/iconfont.dart';
-import 'package:flutter_eleme/views/home/index.dart';
+import 'package:flutter_eleme/views/login/index.dart';
 import 'package:flutter_eleme/views/order/index.dart';
 import 'package:flutter_eleme/views/supermarket/index.dart';
 import 'package:flutter_eleme/views/user/index.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 强制竖屏
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  // 任务栏透明
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
   runApp(const MyApp());
 }
 
@@ -15,44 +28,33 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '仿饿了么',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
+    return ScreenUtilInit(
+      designSize: const Size(750, 1334),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: '仿饿了么',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const FlutterEleme(),
+        );
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+class FlutterEleme extends StatefulWidget {
+  const FlutterEleme({Key? key}) : super(key: key);
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<FlutterEleme> createState() => _FlutterElemeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _FlutterElemeState extends State<FlutterEleme> {
   var allPages = [
-    const HomePage(),
+    const LoginPage(),
     const SuperMarketPage(),
     const OrderPage(),
     const UserPage()
@@ -62,9 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: allPages[currentIndex],
-      ),
+      body: allPages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -73,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(MyCustomIcons.home),
+            
             label: "首页",
           ),
           BottomNavigationBarItem(

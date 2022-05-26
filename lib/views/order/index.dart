@@ -10,12 +10,11 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
       width: 200,
       height: 200,
       color: Colors.yellow,
       child: const Text('我是订单页'),
-    ));
+    );
   }
 }

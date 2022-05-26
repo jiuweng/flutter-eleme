@@ -10,8 +10,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return SafeArea(
+        child: Container(
       width: 200,
       height: 200,
       color: Colors.red,

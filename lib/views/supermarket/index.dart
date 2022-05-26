@@ -10,12 +10,11 @@ class SuperMarketPage extends StatefulWidget {
 class _SuperMarketPageState extends State<SuperMarketPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Container(
       width: 200,
       height: 200,
       color: Colors.pink,
       child: const Text('我是超市页'),
-    ));
+    );
   }
 }
